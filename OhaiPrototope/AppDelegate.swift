@@ -10,13 +10,13 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow!
+    var window: UIWindow?
 	var navigationController: UINavigationController!
 	var sceneListingViewController: SceneListingViewController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
-		window.makeKeyAndVisible()
+		window?.makeKeyAndVisible()
 
 		sceneListingViewController = SceneListingViewController(
 			scenes: Scene.sceneIndex,
@@ -24,13 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		)
 		sceneListingViewController.title = "Prototypes"
 		navigationController = UINavigationController(rootViewController: sceneListingViewController)
-		navigationController.interactivePopGestureRecognizer.enabled = false
-		window.rootViewController = navigationController
+		navigationController.interactivePopGestureRecognizer?.enabled = false
+		window?.rootViewController = navigationController
 
 		let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeBackGesture:")
 		swipeGestureRecognizer.numberOfTouchesRequired = 3
 		swipeGestureRecognizer.direction = .Right
-		window.addGestureRecognizer(swipeGestureRecognizer)
+		window?.addGestureRecognizer(swipeGestureRecognizer)
         return true
     }
 
