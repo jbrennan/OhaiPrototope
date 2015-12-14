@@ -1,5 +1,5 @@
 //
-//  PrototopeRootView.swift
+//  FlippedView.swift
 //  OhaiPrototope
 //
 //  Created by Jason Brennan on 2015-08-17.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-public class PrototopeRootView: NSView {
+public class FlippedView: NSView {
 
 	override public var flipped: Bool {
 		return true

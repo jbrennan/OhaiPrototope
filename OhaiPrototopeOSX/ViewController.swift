@@ -15,6 +15,7 @@ class ViewController: NSViewController {
 	var layer: Layer!
 	var protoroLayer: Layer!
 	var heartbeat: Heartbeat!
+	var scrollLayer: ScrollLayer!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -22,7 +23,7 @@ class ViewController: NSViewController {
 		// Do any additional setup after loading the view.
 //		Speech.say("oh hi", rate: 200)
 		self.view.wantsLayer = true
-		afterDuration(1, { () -> Void in
+		afterDuration(1, action: { () -> Void in
 			
 			self.view.window?.acceptsMouseMovedEvents = true
 		})
@@ -41,10 +42,30 @@ class ViewController: NSViewController {
 		
 //		self.protoroLayer.animators.position.target = Point(x: 100, y: 100)
 		
-		Layer.root.mouseMovedHandler = { 
-			(event: InputEvent) in
-			self.protoroLayer.position = event.globalLocation
+//		Layer.root.mouseMovedHandler = { 
+//			(event: InputEvent) in
+//			self.protoroLayer.position = event.globalLocation
+//		}
+		
+		
+		self.scrollLayer = ScrollLayer()
+		self.scrollLayer.backgroundColor = Color.brown
+		self.scrollLayer.frame.size = Size(width: 300, height: 400)
+		
+		var layers = [Layer]()
+		for index in 0..<5 {
+			let layer = Layer(parent: self.scrollLayer, name: "layer", viewClass: nil)
+			
+			layer.size = Size(width: self.scrollLayer.width - 20, height: 100)
+			layer.frame.origin = Point(x: 10.0, y: Double(index) * 140.0)
+			layer.backgroundColor = Color(hex: 0x70B21A)
+			layer.cornerRadius = Double(index * 2)
+			layers.append(layer)
+			
 		}
+		
+		self.scrollLayer.updateScrollableSizeToFitSublayers()
+		
 		
 //		self.heartbeat = Heartbeat() { _ in
 //			println("buh?")
